@@ -1,11 +1,12 @@
+package com.example.model;
 import java.util.UUID;
 
-public class AdditionalFeautre {
+public class AdditionalFeature {
     private UUID id;
     private String name;
     private double cost;
 
-    public AdditionalFeautre(String name, double cost) {
+    public AdditionalFeature(String name, double cost) {
         id = UUID.randomUUID();
         this.name = name;
         this.cost = cost;
