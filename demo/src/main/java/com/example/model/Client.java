@@ -1,9 +1,36 @@
 package com.example.model;
 import java.util.UUID;
 
+
+
 public class Client {
     private UUID id;
     private String name;
     private int age;
+    private Membership membership;
+
+
+    public Client(UUID id, String name, int age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAge() {
+        return String.valueOf(age);
+    }
+
+    public Membership getMembership() {
+        return membership;
+    }
+
+    public void setMembership(Membership membership) {
+        this.membership = membership;
+    }
 
 }
