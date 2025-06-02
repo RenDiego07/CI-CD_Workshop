@@ -46,4 +46,18 @@
             </plugin>
         </plugins>
     </build>
+    <dependencies>
+        <!-- Otras dependencias -->
+
+        <!-- JUnit 5 para pruebas unitarias -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+    
 </project>
