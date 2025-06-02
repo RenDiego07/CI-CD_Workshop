@@ -1,31 +1,31 @@
 package com.example.model;
 
 public class Plan {
-    private String nombre;
-    private double precio;
-    private String descripcion;
+    private String name;
+    private double price;
+    private String description;
 
-    public Plan(String nombre, double precio, String descripcion) {
-        this.nombre = nombre;
-        this.precio = precio;
-        this.descripcion = descripcion;
+    public Plan(String name, double price, String description) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
     }
 
     // Getters
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public double getPrecio() {
-        return precio;
+    public double getPrice() {
+        return price;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescription() {
+        return description;
     }
 
     @Override
     public String toString() {
-        return String.format("%s - $%.2f - %s", nombre, precio, descripcion);
+        return String.format("%s - $%.2f - %s", name, price, description);
     }
 }
