@@ -15,13 +15,11 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         boolean confirmed = false;
 
-        // 1) Planes disponibles
         Plan basic = new Plan("Basic", 40.00, "Basic access with limited features");
         Plan premium = new Plan("Premium", 70.00, "Full access with all features");
         Plan family = new Plan("Family", 200.00, "Family plan for up to 6 users");
         Plan[] plans = { basic, premium, family };
 
-        // 2) Características adicionales disponibles
         List<AdditionalFeature> availableFeatures = List.of(
             new AdditionalFeature("Personal Training", 170),
             new AdditionalFeature("Group Classes",     30),
@@ -29,7 +27,6 @@ public class Main {
             new AdditionalFeature("Swimming Pool Access", 60)
         );
 
-        // 3) ¿Cuántos miembros se inscriben juntos?
         System.out.print("How many members are signing up together? ");
         int groupSize;
         while (true) {
@@ -39,12 +36,11 @@ public class Main {
                 continue;
             }
             groupSize = scanner.nextInt();
-            scanner.nextLine(); // limpiar salto de línea
+            scanner.nextLine(); 
             if (groupSize >= 1) break;
             System.out.println("The number of members must be at least 1.");
         }
 
-        // 4) Leer nombre y edad de cada miembro
         List<Client> clients = new ArrayList<>();
         for (int i = 1; i <= groupSize; i++) {
             System.out.print("Enter name of member " + i + ": ");
@@ -59,7 +55,7 @@ public class Main {
                     continue;
                 }
                 age = scanner.nextInt();
-                scanner.nextLine(); // limpiar salto de línea
+                scanner.nextLine(); 
                 if (age >= 0) break;
                 System.out.println("Age cannot be negative.");
             }
@@ -67,7 +63,6 @@ public class Main {
             clients.add(new Client(i, name, age));
         }
 
-        // 5) Mensaje informativo de descuento grupal
         if (groupSize >= 2) {
             System.out.println("If " + groupSize + " members sign up for the same plan, they will get a 10% group discount!");
         }
@@ -75,15 +70,12 @@ public class Main {
         Plan selectedPlan = null;
         List<AdditionalFeature> selectedFeatures = new ArrayList<>();
 
-        // 6) Bucle principal
         while (!confirmed) {
-            // 6.1) Mostrar planes disponibles
             System.out.println("\n=== SELECT YOUR PLAN ===");
             for (int i = 0; i < plans.length; i++) {
                 System.out.printf("%d. %s%n", i + 1, plans[i]);
             }
 
-            // 6.2) Leer opción de plan
             int option;
             while (true) {
                 System.out.print("Choose a plan (1-3): ");
@@ -99,7 +91,6 @@ public class Main {
             }
             selectedPlan = plans[option - 1];
 
-            // 6.3) Selección de características adicionales
             selectedFeatures.clear();
             System.out.println("\n=== ADDITIONAL FEATURES ===");
             for (int i = 0; i < availableFeatures.size(); i++) {
@@ -138,17 +129,13 @@ public class Main {
 
             System.out.println("\nMembers and individual costs:");
             for (Client c : clients) {
-                // 6.4.1) Crear Membership para cada cliente
                 Membership membership = new Membership(c, selectedPlan);
                 for (AdditionalFeature f : selectedFeatures) {
                     membership.addAdditionalFeature(f);
                 }
 
-                // 6.4.2) Calcular base + extras usando CostCalculation
-                double base = CostCalculation.calculateBaseCost(membership);
                 double totalBeforeDiscount = CostCalculation.calculateTotalMembershipCost(membership);
 
-                // 6.4.3) Aplicar descuentos especiales por monto
                 double specialDiscount = 0;
                 if (totalBeforeDiscount > 400) {
                     specialDiscount = 50;
@@ -157,12 +144,10 @@ public class Main {
                 }
                 double afterSpecial = totalBeforeDiscount - specialDiscount;
 
-                // 6.4.4) Aplicar recargo del 15% si es plan Premium
                 if (selectedPlan.getName().equalsIgnoreCase("Premium")) {
                     afterSpecial *= 1.15;
                 }
 
-                // 6.4.5) Mostrar desglose por miembro
                 System.out.printf(
                     "- %s (age %s): Base+Extras $%.2f, Special Discount $%.2f, Subtotal $%.2f%n",
                     c.getName(),
@@ -172,11 +157,9 @@ public class Main {
                     afterSpecial
                 );
 
-                // 6.4.6) Acumular subtotal grupal
                 groupSubtotal += afterSpecial;
             }
 
-            // 6.5) Una vez terminado el bucle de todos los clientes, mostrar totales grupales
             System.out.printf("%nGroup Subtotal (sum of all individual subtotals): $%.2f%n", groupSubtotal);
 
             double groupDiscount = 0;
@@ -188,7 +171,6 @@ public class Main {
             System.out.printf("Group Discount (10%%): -$%.2f%n", groupDiscount);
             System.out.printf("Final Group Total: $%.2f%n", groupTotal);
 
-            // 6.6) Confirmar / Cancelar / Modificar (se ejecuta una sola vez por todo el grupo)
             System.out.println("\n=== CONFIRMATION ===");
             System.out.print("Do you want to confirm, cancel or modify? (confirm/cancel/modify): ");
             String response = scanner.next().toLowerCase();
@@ -203,7 +185,6 @@ public class Main {
                     System.exit(-1);
                 case "modify":
                     System.out.println("Returning to plan and features selection...");
-                    // rompe switch y vuelve al while(!confirmed)
                     break;
                 default:
                     System.out.println("Invalid option. Returning to selections...");
