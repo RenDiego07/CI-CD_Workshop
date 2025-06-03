@@ -1,30 +1,46 @@
 package com.example;
 
-import com.example.model.Client;
-import com.example.model.CostCalculation;
 import com.example.model.Plan;
-import com.example.model.Membership;
-import com.example.model.AdditionalFeature;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Client cliente = new Client(1,"Juan Pérez", 80);
+        Plan basic = new Plan("Basic", 9.99, "Basic access with limited features");
+        Plan premium = new Plan("Premium", 19.99, "Full access with all features");
+        Plan family = new Plan("Family", 29.99, "Family plan for up to 6 users");
 
-        Plan planBasico = new Plan(2,"Básico", 50.0);
+        Plan[] plans = { basic, premium, family };
 
-        Membership membresia = new Membership(cliente, planBasico);
+        Scanner scanner = new Scanner(System.in);
 
-        AdditionalFeature pt = new AdditionalFeature("Personal Training", 30.0);
-        AdditionalFeature grupo = new AdditionalFeature("Clases Grupales", 35.0);
-        membresia.additionalFeature(pt);
-        membresia.additionalFeature(grupo);
+        System.out.println("=== SELECT YOUR PLAN ===");
+        System.out.println();
 
-        double costoBase       = CostCalculation.calculateBaseCost(membresia);
-        double costoAdicional  = CostCalculation.calculateAdditionalFeaturesCost(membresia);
-        double costoTotal      = CostCalculation.calculateTotalMembershipCost(membresia);
+        // Show options
+        for (int i = 0; i < plans.length; i++) {
+            System.out.println((i + 1) + ". " + plans[i]);
+        }
 
-        System.out.println("Costo base del plan: $" + costoBase);
-        System.out.println("Costo características adicionales: $" + costoAdicional);
-        System.out.println("Costo total de membresía: $" + costoTotal);
+        System.out.println();
+        System.out.print("Choose an option (1-3): ");
+
+        try {
+            int option = scanner.nextInt();
+
+            if (option >= 1 && option <= 3) {
+                Plan selectedPlan = plans[option - 1];
+                System.out.println();
+                System.out.println("Excellent choice!");
+                System.out.println("You have selected the plan: " + selectedPlan.getName());
+                System.out.println("Price: $" + selectedPlan.getPrice());
+                System.out.println("Description: " + selectedPlan.getDescription());
+            } else {
+                System.out.println("Invalid option. Please choose between 1 and 3.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: Please enter a valid number.");
+        } finally {
+            scanner.close();
+        }
     }
 }

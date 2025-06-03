@@ -1,4 +1,5 @@
 package com.example.model;
+
 import java.util.UUID;
 
 public class AdditionalFeature {
@@ -13,7 +14,7 @@ public class AdditionalFeature {
     }
 
     public UUID getId() {
-        return  this.id;
+        return this.id;
     }
 
     public String getName() {
