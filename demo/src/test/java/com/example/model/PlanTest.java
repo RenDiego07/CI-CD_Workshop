@@ -31,7 +31,7 @@ public class PlanTest {
 
     @Test
     void testToString() {
-        String expected = "Basic - $9,99 - Basic access";
+        String expected = "Basic - $9.99 - Basic access";
         assertEquals(expected, basicPlan.toString());
     }
 

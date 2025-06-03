@@ -1,7 +1,4 @@
 package com.example.model;
-import java.util.UUID;
-
-
 
 public class Client {
     private int id;
