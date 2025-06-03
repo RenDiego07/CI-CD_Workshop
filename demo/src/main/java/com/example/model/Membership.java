@@ -29,7 +29,7 @@ public class Membership {
         this.plan = plan;
     }
 
-    public void additionalFeature(AdditionalFeature additionalFeature) {
+    public void addAdditionalFeature(AdditionalFeature additionalFeature) {
         this.additionalFeatures.add(additionalFeature);
     }
 
